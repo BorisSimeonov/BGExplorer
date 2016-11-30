@@ -1,0 +1,25 @@
+@font-face {
+    font-family: Bangers;
+    src: url('./../../../Resourses/Fonts/Bangers.ttf');
+}
+
+.header-title span{
+    font-family: Bangers;
+    font-size: 1.5em;
+    display: inline-block;
+    margin: 10px;
+}
+
+.header-title span[color="blue"]{
+    color: deepskyblue;
+}
+
+.header-title span[color='blue']:hover {
+    color: darkviolet;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.header-title img{
+    width: 40px;
+}
