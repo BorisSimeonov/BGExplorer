@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import * as appActions from '../../Actions/componentActions';
 
 import './Navigation.css';
 
@@ -19,9 +20,13 @@ export default class Navigation extends React.Component {
                     <Link to="/home">Home</Link>
                     <Link to="/locations">Locations</Link>
                     <Link to="/feedback">Feedback</Link>
-                    <a href="#">Logout</a>
+                    <Link onClick={Navigation.logoutUser.bind(this)}>Logout</Link>
                 </div>
             )
         }
+    }
+
+    static logoutUser() {
+        appActions.logoutUser();
     }
 }

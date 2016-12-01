@@ -6,8 +6,8 @@ class AppStore extends EventEmitter {
     constructor() {
         super();
         this.userData = {
-            "username": null,
-            "userId": null
+            "username": sessionStorage.getItem('username'),
+            "userId": sessionStorage.getItem('userId')
         };
     }
 
