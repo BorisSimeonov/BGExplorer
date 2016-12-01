@@ -1,10 +1,10 @@
 @font-face {
     font-family: DroidSerifBoldItalic;
-    src: url('./../../Resourses/Fonts/DroidSerif-BoldItalic.ttf');
+    src: url('../../Resources/Fonts/DroidSerif-BoldItalic.ttf');
 }
 
 .navigation-bar {
-    font-family: DroidSerifBoldItalic;
+    font-family: DroidSerifBoldItalic, sans-serif;
     text-align: center;
     padding: 10px 5px;
     line-height: 1.5;

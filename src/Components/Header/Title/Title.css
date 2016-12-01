@@ -1,10 +1,10 @@
 @font-face {
     font-family: Bangers;
-    src: url('./../../../Resourses/Fonts/Bangers.ttf');
+    src: url('../../../Resources/Fonts/Bangers.ttf');
 }
 
 .header-title span{
-    font-family: Bangers;
+    font-family: Bangers, sans-serif;
     font-size: 1.5em;
     display: inline-block;
     margin: 10px;

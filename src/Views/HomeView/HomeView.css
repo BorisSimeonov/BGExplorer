@@ -1,0 +1,11 @@
+.app-home {
+    border-top: 5px double deepskyblue;
+    padding: 10px;
+}
+
+.app-home img {
+    width: 90%;
+    max-width: 450px;
+    border-radius: 25% 25%;
+    border: 4px outset dimgray;
+}

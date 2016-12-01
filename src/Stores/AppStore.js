@@ -23,7 +23,7 @@ class AppStore extends EventEmitter {
     }
 
     handleActions(action) {
-        console.log('AppStore action.', action);
+        console.log('AppStore action.', action); //For testing and debugging
         switch(action.type) {
             case 'LOGIN_USER':
                 this.changeUser(action.username, action.userId);

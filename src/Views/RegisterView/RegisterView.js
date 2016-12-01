@@ -1,5 +1,7 @@
 import React from 'react';
 
+import * as appActions from '../../Actions/componentActions';
+
 export default class RegisterView extends React.Component {
     render() {
         return (
@@ -23,12 +25,10 @@ export default class RegisterView extends React.Component {
 
     submitForm(event) {
         event.preventDefault();
-        //TODO: implement register logic through kinveyAjaxRequester
 
-        this.props.onsubmit(
+        appActions.registerUser(
             this.usernameField.value,
             this.passwordField.value
-        )
-
+        );
     }
 }

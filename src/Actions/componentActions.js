@@ -1,6 +1,6 @@
 import dispatcher from '../Dispatcher/Dispatcher';
 import kinveyAjaxRequester from '../Model/AjaxRequester';
-import { hashHistory } from 'react-router';
+import {hashHistory} from 'react-router';
 
 export function loginUser(username, password) {
     kinveyAjaxRequester.loginUser(
@@ -25,9 +25,23 @@ export function loginUser(username, password) {
 }
 
 export function logoutUser() {
-    dispatcher.dispatch({
-        type: "LOGOUT_USER"
-    });
+    kinveyAjaxRequester.logoutUser()
+        .then(logoutSuccess);
 
-    hashHistory.push('/home');
+    function logoutSuccess() {
+        dispatcher.dispatch({
+            type: "LOGOUT_USER"
+        });
+        sessionStorage.clear();
+        hashHistory.push('/home');
+    }
+}
+
+export function registerUser(username, password) {
+    kinveyAjaxRequester.registerUser(username, password)
+        .then(registrationSuccess);
+
+    function registrationSuccess() {
+        hashHistory.push('/login');
+    }
 }

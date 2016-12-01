@@ -4,7 +4,7 @@ import './Title.css';
 
 export default class Title extends React.Component {
     render() {
-        let imageLogo = <img alt="*" src={require('./../../../Resourses/Images/traveler.png')} />;
+        let imageLogo = <img alt="*" src={require('./../../../Resources/Images/traveler.png')} />;
 
         return (
             <h1 className="header-title">

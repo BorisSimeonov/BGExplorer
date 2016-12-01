@@ -1,4 +1,13 @@
-.logged-user {
+.logged-text {
     font-size: 1.2em;
     color: dimgray;
+}
+
+.logged-name {
+    color: deepskyblue;
+    font-size: 1.1em;
+}
+
+.logged-name:hover {
+    color: darkviolet;
 }
