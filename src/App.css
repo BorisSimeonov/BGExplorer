@@ -48,3 +48,8 @@ table {
 .app-header {
   background-color: white;
 }
+
+.separator {
+  width: 80%;
+  border: 3px double deepskyblue;
+}

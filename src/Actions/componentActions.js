@@ -1,5 +1,6 @@
 import dispatcher from '../Dispatcher/Dispatcher';
 import kinveyAjaxRequester from '../Model/AjaxRequester';
+import App from '../App';
 import {hashHistory} from 'react-router';
 
 export function loginUser(username, password) {
@@ -19,7 +20,7 @@ export function loginUser(username, password) {
             username: loggedUser.username,
             userId: loggedUser._id
         });
-
+        App.showInfo(`${loggedUser.username} has logged in.`);
         hashHistory.push('/locations');
     }
 }
@@ -33,6 +34,7 @@ export function logoutUser() {
             type: "LOGOUT_USER"
         });
         sessionStorage.clear();
+        App.showInfo('Explorer logged out.');
         hashHistory.push('/home');
     }
 }
@@ -42,6 +44,7 @@ export function registerUser(username, password) {
         .then(registrationSuccess);
 
     function registrationSuccess() {
+        App.showInfo('New explorer has been registered.');
         hashHistory.push('/login');
     }
 }

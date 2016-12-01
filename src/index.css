@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: "Arial Black";
   min-width: 500px;
   max-width: 750px;
   margin-left: auto;
@@ -26,4 +26,27 @@ body {
 
 .user-form input[type='submit'] {
   font-size: 0.9em;
+}
+
+.message-box {
+  margin: 5px auto;
+  font-style: italic;
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+  display: none;
+  width: 80%;
+  border: 3px dotted white;
+}
+
+#loadingBox {
+  background-color: blue;
+}
+
+#errorBox {
+  background-color: maroon;
+}
+
+#infoBox {
+  background-color: green;
 }
