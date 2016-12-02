@@ -37,18 +37,22 @@
     width: 80%;
 }
 
-.locations-select, .article-select {
-    width: 100%;
+.location-item {
     font-size: 1.1em;
-    margin: 10px 0;
+    margin-top: 5px;
     cursor: pointer;
+    width: 80%;
     background-color: white;
-    color: black;
-    padding: 3px 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px 0;
     border: 3px outset dimgray;
-    border-radius: 10px;
+    border-radius: 25px;
 }
 
-.locations-select:hover, .article-select:hover {
-    border-color: deepskyblue;
+.location-item:hover {
+    font-style: italic;
+    color: deepskyblue;
+    border-color: silver;
+    background-color: black;
 }

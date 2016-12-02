@@ -1,7 +1,6 @@
 import React from 'react';
 
 import KinveyAjaxRequester from '../../Model/AjaxRequester';
-import $ from 'jquery';
 
 import './LocationsView.css'
 
@@ -9,24 +8,26 @@ export default class LocationsView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            options: [],
+            locations: [],
             articles: []
         };
     }
 
-    componentDidMount() {
-        $('.locations-select').on('change', this.requestArticles.bind(this))
-    }
 
     render() {
         let natureIcon = <img alt="Section:" src={require('../../Resources/Images/nature.png')}/>;
         let villagesIcon = <img alt="Section:" src={require('../../Resources/Images/villages.png')}/>;
 
         if (sessionStorage.getItem('authToken')) {
-            let options = this.state.options.map(item =>
-                <option className="location-option" key={item._id} value={item._id}>{item.locationName}</option>);
+            let locations = this.state.locations.map(item =>
+                <li className="location-item" key={item._id}
+                    onClick={this.requestArticles.bind(this, item._id)}>
+                    {item.locationName}
+                </li>);
             let articles = this.state.articles.map(item =>
-                <option key={item._id} value={item._id}>{item.title}</option>);
+                <li className="location-item" key={item._id} value={item._id}>
+                    {item.title}
+                </li>);
 
             return (
                 <nav className="locations-navigation">
@@ -41,16 +42,14 @@ export default class LocationsView extends React.Component {
                         </a>
                     </div>
                     <div>
-                        <select className="locations-select">
-                            <option selected disabled="disabled">Choose exact location.</option>
-                            {options}
-                        </select>
+                        <ul id="locations-ul">
+                            {locations}
+                        </ul>
                     </div>
-                    <div id="article">
-                        <select className="article-select">
-                            <option selected disabled="disabled">Choose exact location.</option>
+                    <div id="articles">
+                        <ul id="articles-ul">
                             {articles}
-                        </select>
+                        </ul>
                     </div>
                 </nav>
             )
@@ -62,7 +61,7 @@ export default class LocationsView extends React.Component {
     }
 
     requestLocations(type) {
-        switch(type) {
+        switch (type) {
             case 'mountain':
                 KinveyAjaxRequester.getMountainLocations()
                     .then(appendResultAsOptions.bind(this));
@@ -76,14 +75,15 @@ export default class LocationsView extends React.Component {
         }
 
         function appendResultAsOptions(locationsArray) {
-            this.setState({options: locationsArray});
+            this.setState({
+                locations: locationsArray,
+                articles: []
+            });
         }
     }
 
-    requestArticles() {
-        let selectedLocationId = $('.location-option:selected').val();
-
-        KinveyAjaxRequester.getArticlesByLocationId(selectedLocationId)
+    requestArticles(articleId) {
+        KinveyAjaxRequester.getArticlesByLocationId(articleId)
             .then(articlesRequestSuccess.bind(this));
 
         function articlesRequestSuccess(articlesList) {
