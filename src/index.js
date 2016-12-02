@@ -21,9 +21,7 @@ ReactDOM.render((
             <Route path="register" component={RegisterView}/>
             <Route path="locations" component={LocationsView}/>
             <Route path="feedback" component={FeedbackView}/>
-            <Route path="article" component={ArticleView}>
-                <Route path="/article/comments" component={ArticleCommentView}/>
-            </Route>
+            <Route path="article" component={ArticleView}/>
         </Route>
     </Router>),
   document.getElementById('wrapper')

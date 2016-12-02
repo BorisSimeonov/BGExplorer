@@ -50,7 +50,7 @@ export default class LocationsView extends React.Component {
                             {
                                 this.state.loadedLocations.map(item =>
                                     <li className="location-item" key={item._id}
-                                        onClick={LocationsView.requestArticlesByLocationId.bind(this, item._id)}>
+                                        onClick={this.requestArticlesByLocationId.bind(this, item._id)}>
                                         {item.locationName}
                                     </li>)
                             }
@@ -90,11 +90,11 @@ export default class LocationsView extends React.Component {
         }
     }
 
-    static requestArticlesByLocationId(articleId) {
+    requestArticlesByLocationId(articleId) {
         componentActions.requestArticlesByLocationId(articleId);
     }
 
-    static requestArticleById(articleId) {
+    requestArticleById(articleId) {
         componentActions.requestArticleByArticleId(articleId);
     }
 }
