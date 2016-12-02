@@ -6,13 +6,27 @@ class AppStore extends EventEmitter {
     constructor() {
         super();
         this.userData = {
-            "username": sessionStorage.getItem('username'),
-            "userId": sessionStorage.getItem('userId')
+            username: sessionStorage.getItem('username'),
+            userId: sessionStorage.getItem('userId')
         };
+        this.articlesData = {
+            loadedLocations: [],
+            loadedArticles: [],
+            selectedArticle: null
+        }
     }
 
     getUserInfo() {
         return this.userData;
+    }
+
+    getArticlesData() {
+        return this.articlesData;
+    }
+
+    changeLocations(loadedLocations) {
+        this.articlesData.loadedLocations = loadedLocations;
+        this.emit('articleChange');
     }
 
     changeUser(username, userId) {
@@ -30,6 +44,9 @@ class AppStore extends EventEmitter {
                 break;
             case 'LOGOUT_USER':
                 this.changeUser(null, null);
+                break;
+            case 'LOCATIONS_CHANGE':
+                this.changeLocations(action.loadedLocations);
                 break;
             default:
                 break;

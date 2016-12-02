@@ -45,7 +45,7 @@ let KinveyAjaxRequester = (function () {
             url: base_url + 'appdata/' +
             app_key + '/locations',
             headers: getKinveyAuthHeaders()
-        })
+        });
     };
 
     let getMunicipalityLocations = function () {

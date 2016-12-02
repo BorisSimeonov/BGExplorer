@@ -48,3 +48,27 @@ export function registerUser(username, password) {
         hashHistory.push('/login');
     }
 }
+
+export function requestMountainNames() {
+    kinveyAjaxRequester.getMountainLocations()
+        .then(requestSuccess);
+
+    function requestSuccess(mountainLocationNames) {
+        dispatcher.dispatch({
+            type: 'LOCATIONS_CHANGE',
+            loadedLocations: mountainLocationNames
+        });
+    }
+}
+
+export function requestMunicipalityNames() {
+    kinveyAjaxRequester.getMunicipalityLocations()
+        .then(requestSuccess);
+
+    function requestSuccess(mountainLocationNames) {
+        dispatcher.dispatch({
+            type: 'LOCATIONS_CHANGE',
+            loadedLocations: mountainLocationNames
+        });
+    }
+}

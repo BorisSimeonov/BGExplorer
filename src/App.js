@@ -23,7 +23,7 @@ export default class App extends React.Component {
                 username: newState.username,
                 userId: newState.userId
             });
-        })
+        });
     }
 
     componentDidMount() {
