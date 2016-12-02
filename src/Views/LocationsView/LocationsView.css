@@ -1,0 +1,54 @@
+.locations-menu-item {
+    font-size: 1.2em;
+    font-style: italic;
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.locations-menu-item img {
+    margin-right: 5px;
+    border: 2px outset dimgray;
+    border-radius: 20px;
+    height: 45px;
+    width: 60px;
+}
+
+
+.nature:hover img {
+    border-color: green;
+}
+
+.nature:hover {
+    color: green;
+}
+
+.village:hover img {
+    border-color: deepskyblue;
+}
+
+.village:hover {
+    color: deepskyblue;
+}
+
+.locations-navigation {
+    width: 80%;
+}
+
+.locations-select, .article-select {
+    width: 100%;
+    font-size: 1.1em;
+    margin: 10px 0;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    padding: 3px 10px;
+    border: 3px outset dimgray;
+    border-radius: 10px;
+}
+
+.locations-select:hover, .article-select:hover {
+    border-color: deepskyblue;
+}

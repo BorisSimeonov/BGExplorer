@@ -48,3 +48,8 @@ export function registerUser(username, password) {
         hashHistory.push('/login');
     }
 }
+
+export function requestMountainArticleNames() {
+    //TODO: implement flux patter for article requesting and visualization
+    // /kinveyAjaxRequester.getMountainLocations()
+}
