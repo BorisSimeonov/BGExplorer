@@ -67,6 +67,33 @@ let KinveyAjaxRequester = (function () {
         })
     };
 
+    let getArticleByArticleId = function (articleId) {
+        return $.ajax({
+            method: 'GET',
+            url: base_url + 'appdata/' + app_key +
+            '/articles-data?query=' + JSON.stringify({article_id: articleId}),
+            headers: getKinveyAuthHeaders()
+        });
+    };
+
+    let getLeadingImagesByArticleId = function (articleId) {
+        return $.ajax({
+            method: 'GET',
+            url: base_url + 'blob/' + app_key +
+            '?query=' + JSON.stringify({article_id: articleId, type: "lead"}),
+            headers: getKinveyAuthHeaders()
+        });
+    };
+
+    let getTrailingImagesByArticleId = function (articleId) {
+        return $.ajax({
+            method: 'GET',
+            url: base_url + 'blob/' + app_key +
+            '?query=' + JSON.stringify({article_id: articleId, type: "trail"}),
+            headers: getKinveyAuthHeaders()
+        });
+    };
+
     function getKinveyAuthHeaders() {
         return {
             Authorization: 'Kinvey ' + sessionStorage.getItem('authToken')
@@ -79,7 +106,10 @@ let KinveyAjaxRequester = (function () {
         registerUser,
         getMountainLocations,
         getMunicipalityLocations,
-        getArticlesByLocationId
+        getArticlesByLocationId,
+        getArticleByArticleId,
+        getLeadingImagesByArticleId,
+        getTrailingImagesByArticleId
     }
 })();
 

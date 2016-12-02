@@ -2,7 +2,6 @@ import React from 'react';
 
 import* as componentActions from '../../Actions/componentActions';
 import appStore from '../../Stores/AppStore';
-import KinveyAjaxRequester from '../../Model/AjaxRequester';
 
 import './LocationsView.css'
 
@@ -35,32 +34,35 @@ export default class LocationsView extends React.Component {
         if (sessionStorage.getItem('authToken')) {
             return (
                 <nav className="locations-navigation">
-                    <div>
+                    <div className="navigation-icon-holder">
                         <a className="locations-menu-item nature"
-                           onClick={this.requestLocations.bind(this, "mountain")}>
+                           onClick={LocationsView.requestAllLocationsOfType.bind(this, "mountain")}>
                             {natureIcon}
                         </a>
                         <a className="locations-menu-item village"
-                           onClick={this.requestLocations.bind(this, "municipality")}>
+                           onClick={LocationsView.requestAllLocationsOfType.bind(this, "municipality")}>
                             {villagesIcon}
                         </a>
                     </div>
                     <div>
+                        <span className="locations-label-span">Show/Hide Locations</span>
                         <ul id="locations-ul">
                             {
                                 this.state.loadedLocations.map(item =>
                                     <li className="location-item" key={item._id}
-                                        onClick={this.requestArticles.bind(this, item._id)}>
+                                        onClick={LocationsView.requestArticlesByLocationId.bind(this, item._id)}>
                                         {item.locationName}
                                     </li>)
                             }
                         </ul>
                     </div>
                     <div id="articles">
+                        <span className="articles-label-span">Show/Hide Articles</span>
                         <ul id="articles-ul">
                             {
                                 this.state.loadedArticles.map(item =>
-                                    <li className="location-item" key={item._id} value={item._id}>
+                                    <li className="location-item" key={item._id}
+                                    onClick={this.requestArticleById.bind(this, item._id)}>
                                         {item.title}
                                     </li>)
                             }
@@ -75,7 +77,7 @@ export default class LocationsView extends React.Component {
         }
     }
 
-    requestLocations(type) {
+    static requestAllLocationsOfType(type) {
         switch (type) {
             case 'mountain':
                 componentActions.requestMountainNames();
@@ -88,12 +90,11 @@ export default class LocationsView extends React.Component {
         }
     }
 
-    requestArticles(articleId) {
-        KinveyAjaxRequester.getArticlesByLocationId(articleId)
-            .then(articlesRequestSuccess.bind(this));
+    static requestArticlesByLocationId(articleId) {
+        componentActions.requestArticlesByLocationId(articleId);
+    }
 
-        function articlesRequestSuccess(articlesList) {
-            this.setState({articles: articlesList});
-        }
+    static requestArticleById(articleId) {
+        componentActions.requestArticleByArticleId(articleId);
     }
 }

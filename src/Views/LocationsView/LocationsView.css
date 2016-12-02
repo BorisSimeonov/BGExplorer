@@ -37,6 +37,14 @@
     width: 80%;
 }
 
+.locations-navigation ul {
+    margin: 20px 0;
+}
+
+.navigation-icon-holder {
+    margin-bottom: 10px;
+}
+
 .location-item {
     font-size: 1.1em;
     margin-top: 5px;
@@ -55,4 +63,15 @@
     color: deepskyblue;
     border-color: silver;
     background-color: black;
+}
+
+.articles-label-span, .locations-label-span {
+    font-size: 1.3em;
+    color: darkgreen;
+    cursor: pointer;
+
+}
+
+.articles-label-span:hover, .locations-label-span:hover {
+    color: deepskyblue;
 }

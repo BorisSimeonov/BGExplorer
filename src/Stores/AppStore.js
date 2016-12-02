@@ -12,7 +12,8 @@ class AppStore extends EventEmitter {
         this.articlesData = {
             loadedLocations: [],
             loadedArticles: [],
-            selectedArticle: null
+            selectedArticle: null,
+            selectedArticleImages: {lead: null, trailing: []}
         }
     }
 
@@ -24,8 +25,33 @@ class AppStore extends EventEmitter {
         return this.articlesData;
     }
 
+    getSelectedArticleData() {
+        return {
+            selectedArticle: this.articlesData.selectedArticle,
+            selectedArticleImages: this.articlesData.selectedArticleImages
+        };
+    }
+
     changeLocations(loadedLocations) {
         this.articlesData.loadedLocations = loadedLocations;
+        this.articlesData.loadedArticles = [];
+        this.articlesData.selectedArticle = null;
+
+        this.emit('articleChange');
+    }
+
+    changeArticles(loadedArticles) {
+        this.articlesData.loadedArticles = loadedArticles;
+        this.articlesData.selectedArticle = null;
+
+        this.emit('articleChange');
+    }
+
+    changeSelectedArticle(selectedArticle, leadingImageURL, trailingImageURLs) {
+        this.articlesData.selectedArticle = selectedArticle;
+        this.articlesData.selectedArticleImages.lead = leadingImageURL;
+        this.articlesData.selectedArticleImages.trailing = trailingImageURLs;
+
         this.emit('articleChange');
     }
 
@@ -47,6 +73,16 @@ class AppStore extends EventEmitter {
                 break;
             case 'LOCATIONS_CHANGE':
                 this.changeLocations(action.loadedLocations);
+                break;
+            case 'ARTICLES_CHANGE':
+                this.changeArticles(action.loadedArticles);
+                break;
+            case 'ARTICLE_LOADED':
+                this.changeSelectedArticle(
+                    action.selectedArticle[0],
+                    action.leadingImageURL[0],
+                    action.trailingImageURLs
+                );
                 break;
             default:
                 break;

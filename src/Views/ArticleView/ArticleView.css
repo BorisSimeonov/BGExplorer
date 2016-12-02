@@ -1,0 +1,33 @@
+@font-face {
+    font-family: DroidSerif;
+    src: url('../../Resources/Fonts/DroidSerif.ttf');
+}
+
+.article-view-container {
+    font-family: cursive;
+}
+
+.article-view-container h1 {
+    width: 80%;
+    margin: auto;
+    padding-bottom: 15px;
+}
+
+.article-view-container img {
+    width: 80%;
+    border: 5px ridge dimgray;
+    border-radius: 10%;
+    margin-bottom: 20px;
+}
+
+.article-view-container p {
+    text-align: justify;
+    text-indent: 35px;
+    margin: 25px 15px;
+}
+
+.article-view-container p::first-letter {
+    font-size: 1.6em;
+    color: darkgreen;
+}
+

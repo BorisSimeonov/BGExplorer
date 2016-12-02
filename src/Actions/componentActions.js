@@ -1,7 +1,7 @@
 import dispatcher from '../Dispatcher/Dispatcher';
 import kinveyAjaxRequester from '../Model/AjaxRequester';
 import App from '../App';
-import {hashHistory} from 'react-router';
+import { browserHistory } from 'react-router';
 
 export function loginUser(username, password) {
     kinveyAjaxRequester.loginUser(
@@ -21,7 +21,7 @@ export function loginUser(username, password) {
             userId: loggedUser._id
         });
         App.showInfo(`${loggedUser.username} has logged in.`);
-        hashHistory.push('/locations');
+        browserHistory.push('/locations');
     }
 }
 
@@ -35,7 +35,7 @@ export function logoutUser() {
         });
         sessionStorage.clear();
         App.showInfo('Explorer logged out.');
-        hashHistory.push('/home');
+        browserHistory.push('/home');
     }
 }
 
@@ -45,7 +45,7 @@ export function registerUser(username, password) {
 
     function registrationSuccess() {
         App.showInfo('New explorer has been registered.');
-        hashHistory.push('/login');
+        browserHistory.push('/login');
     }
 }
 
@@ -54,10 +54,16 @@ export function requestMountainNames() {
         .then(requestSuccess);
 
     function requestSuccess(mountainLocationNames) {
-        dispatcher.dispatch({
-            type: 'LOCATIONS_CHANGE',
-            loadedLocations: mountainLocationNames
-        });
+        let length = mountainLocationNames.length;
+        if(length) {
+            dispatcher.dispatch({
+                type: 'LOCATIONS_CHANGE',
+                loadedLocations: mountainLocationNames
+            });
+            App.showInfo(`${length} new location/s loaded.`);
+        } else {
+            App.showInfo(`No location found.`);
+        }
     }
 }
 
@@ -66,9 +72,51 @@ export function requestMunicipalityNames() {
         .then(requestSuccess);
 
     function requestSuccess(mountainLocationNames) {
+        let length = mountainLocationNames.length;
+        if(length) {
+            dispatcher.dispatch({
+                type: 'LOCATIONS_CHANGE',
+                loadedLocations: mountainLocationNames
+            });
+            App.showInfo(`${length} new location/s loaded.`);
+        } else {
+            App.showInfo(`No location found.`);
+        }
+    }
+}
+
+export function requestArticlesByLocationId(locationId) {
+    kinveyAjaxRequester.getArticlesByLocationId(locationId)
+        .then(requestSuccess);
+    function requestSuccess(articlesArray) {
+        let length = articlesArray.length;
+        if(length) {
+            dispatcher.dispatch({
+                type: 'ARTICLES_CHANGE',
+                loadedArticles: articlesArray
+            });
+            App.showInfo(`Success: ${length} articles found.`);
+        } else {
+            App.showInfo(`No articles found for this location.`);
+        }
+    }
+}
+
+export function requestArticleByArticleId(articleId) {
+    Promise.all([
+        kinveyAjaxRequester.getArticleByArticleId(articleId),
+        kinveyAjaxRequester.getLeadingImagesByArticleId(articleId),
+        kinveyAjaxRequester.getTrailingImagesByArticleId(articleId)
+    ]).then(requestSuccess);
+
+    function requestSuccess([articleObject, leadingImageURL, trailingImageURLs]) {
+        App.showInfo('Article loaded.');
         dispatcher.dispatch({
-            type: 'LOCATIONS_CHANGE',
-            loadedLocations: mountainLocationNames
+            type: 'ARTICLE_LOADED',
+            selectedArticle: articleObject,
+            leadingImageURL,
+            trailingImageURLs
         });
+        browserHistory.push('article');
     }
 }
