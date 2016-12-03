@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 import* as componentActions from '../../Actions/componentActions';
 import appStore from '../../Stores/AppStore';
@@ -45,24 +46,30 @@ export default class LocationsView extends React.Component {
                         </a>
                     </div>
                     <div>
-                        <span className="locations-label-span">Show/Hide Locations</span>
+                        <span className="locations-label-span"
+                              onClick={LocationsView.handleShowHideClicked.bind(this, '#locations-ul li')}>
+                            Show/Hide Locations
+                        </span>
                         <ul id="locations-ul">
                             {
                                 this.state.loadedLocations.map(item =>
                                     <li className="location-item" key={item._id}
-                                        onClick={this.requestArticlesByLocationId.bind(this, item._id)}>
+                                        onClick={LocationsView.requestArticlesByLocationId.bind(this, item._id)}>
                                         {item.locationName}
                                     </li>)
                             }
                         </ul>
                     </div>
                     <div id="articles">
-                        <span className="articles-label-span">Show/Hide Articles</span>
+                        <span className="articles-label-span"
+                              onClick={LocationsView.handleShowHideClicked.bind(this, '#articles-ul li')}>
+                            Show/Hide Articles
+                        </span>
                         <ul id="articles-ul">
                             {
                                 this.state.loadedArticles.map(item =>
                                     <li className="location-item" key={item._id}
-                                    onClick={this.requestArticleById.bind(this, item._id)}>
+                                        onClick={LocationsView.requestArticleById.bind(this, item._id)}>
                                         {item.title}
                                     </li>)
                             }
@@ -75,6 +82,10 @@ export default class LocationsView extends React.Component {
                 <p>Please login first.</p>
             )
         }
+    }
+
+    static handleShowHideClicked(targetSelector) {
+        $(targetSelector).toggle();
     }
 
     static requestAllLocationsOfType(type) {
@@ -90,11 +101,11 @@ export default class LocationsView extends React.Component {
         }
     }
 
-    requestArticlesByLocationId(articleId) {
+    static requestArticlesByLocationId(articleId) {
         componentActions.requestArticlesByLocationId(articleId);
     }
 
-    requestArticleById(articleId) {
+    static requestArticleById(articleId) {
         componentActions.requestArticleByArticleId(articleId);
     }
 }
