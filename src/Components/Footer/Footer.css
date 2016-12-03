@@ -1,0 +1,19 @@
+.app-footer {
+    position: inherit;
+    bottom: 0;
+    display: inherit;
+    text-align: center;
+    margin-top: 20px;
+    padding: 35px 0;
+    border-radius: 140px 140px  0 0;
+    border-top: 5px dotted white;
+    background-color: silver;
+    color: white;
+    font-size: 1.0em;
+}
+
+.app-footer p:hover {
+    font-style: italic;
+    color: black;
+    cursor: pointer;
+}

@@ -6,6 +6,7 @@
 .logged-name {
     color: deepskyblue;
     font-size: 1.1em;
+    cursor: none;
 }
 
 .logged-name:hover {

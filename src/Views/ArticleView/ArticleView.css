@@ -1,8 +1,3 @@
-@font-face {
-    font-family: DroidSerif;
-    src: url('../../Resources/Fonts/DroidSerif.ttf');
-}
-
 .article-view-container {
     font-family: cursive;
 }
@@ -13,11 +8,16 @@
     padding-bottom: 15px;
 }
 
-.article-view-container img {
-    width: 80%;
-    border: 5px ridge dimgray;
+.lead-article-image {
+    width: 90%;
+    border: 5px ridge;
+    border-color: dimgray white;
     border-radius: 10%;
     margin-bottom: 20px;
+}
+
+.lead-article-image:hover {
+    border-color: white dimgray;
 }
 
 .article-view-container p {
@@ -31,3 +31,104 @@
     color: darkgreen;
 }
 
+.gallery-image {
+    width: 14%;
+    margin: 10px;
+    display: inline-block;
+    border: 5px ridge;
+    border-color: dimgray white;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+.gallery-image:hover {
+    border-color: white dimgray;
+}
+
+.gallery-holder {
+    border: 8px ridge;
+    border-color: dimgray white;
+    border-radius: 10%;
+    width: 90%;
+    margin: 10px auto;
+}
+
+.gallery-holder:hover {
+    border-color: white dimgray;
+}
+
+.gallery-holder h1 {
+    font-family: Bangers, sans-serif;
+    margin-top: 10px;
+}
+
+.gallery-holder h1 span {
+    color: deepskyblue;
+    cursor: none;
+}
+
+.gallery-holder h1 span:hover {
+    color: darkviolet;
+}
+
+.article-button-holder button {
+    font-family: Bangers, sans-serif;
+    font-size: 1.2em;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border: 2px outset white;
+    width: 25%;
+}
+
+.article-button-holder button span {
+    color: deepskyblue;
+}
+
+.article-button-holder button:hover span {
+    color: darkviolet;
+}
+.article-button-holder button:hover {
+    border-color: deepskyblue;
+    color: black;
+}
+
+.article-left-button {
+    background: dimgray no-repeat center center fixed; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, white, dimgray); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, white, dimgray); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, white, dimgray); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, white, dimgray); /* Standard syntax */
+    border-radius: 50% 0 0 50%;
+    margin-right: 5px;
+}
+
+.article-right-button {
+    background: dimgray no-repeat center center fixed; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left bottom, dimgray, white); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(top right, dimgray, white); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(top right, dimgray, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to top right, dimgray, white); /* Standard syntax */
+    border-radius: 0 50% 50% 0;
+    margin-left: 5px;
+}
+
+.article-right-button:hover {
+    background: white no-repeat center center fixed; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left bottom, white, silver); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(top right, white, silver); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(top right, white, silver); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to top right, white, silver); /* Standard syntax */
+}
+
+.article-left-button:hover {
+    background: white no-repeat center center fixed; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, silver, white); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, silver, white); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, silver, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, silver, white); /* Standard syntax */
+}
+
+#article-gallery-section, #article-comments-section {
+    display: none;
+}

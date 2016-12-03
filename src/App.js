@@ -5,6 +5,7 @@ import appStore from './Stores/AppStore';
 import $ from 'jquery';
 
 import ErrorBox from './Components/MessageBoxes/ErrorBox/ErrorBox';
+import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import InfoBox from  './Components/MessageBoxes/InfoBox/InfoBox';
 import LoadingBox from './Components/MessageBoxes/LoadingBox/LoadingBox';
@@ -18,7 +19,7 @@ export default class App extends React.Component {
 
     componentWillMount() {
         appStore.on('userChange', () => {
-            let newState  = appStore.getUserInfo();
+            let newState = appStore.getUserInfo();
             this.setState({
                 username: newState.username,
                 userId: newState.userId
@@ -48,10 +49,10 @@ export default class App extends React.Component {
             errorMsg = "Cannot connect due to network error.";
         if (response.responseJSON && response.responseJSON.description)
             errorMsg = response.responseJSON.description;
-        this.showError(errorMsg);
+        App.showError(errorMsg);
     }
 
-    showError(errorMsg) {
+    static showError(errorMsg) {
         $('#errorBox').text("Error: " + errorMsg).show();
     }
 
@@ -63,16 +64,19 @@ export default class App extends React.Component {
     }
 
     render() {
-        const { username } = this.state;
+        const {username} = this.state;
         return (
-            <div className="App">
-                <Header username={username}/>
-                <Navigation username={username}/>
-                <hr className="separator" />
-                <LoadingBox />
-                <InfoBox />
-                <ErrorBox />
-                {this.props.children}
+            <div>
+                <div className="App">
+                    <Header username={username}/>
+                    <Navigation username={username}/>
+                    <hr className="separator"/>
+                    <LoadingBox />
+                    <InfoBox />
+                    <ErrorBox />
+                    {this.props.children}
+                </div>
+                <Footer />
             </div>
         );
     }

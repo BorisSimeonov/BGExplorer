@@ -4,7 +4,6 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import App from './App';
 import './index.css';
 
-import ArticleCommentView from './Views/ArticleCommentView/ArticleCommentView';
 import ArticleView from './Views/ArticleView/ArticleView';
 import FeedbackView from './Views/FeedbackView/FeedbackView';
 import HomeView from './Views/HomeView/HomeView';

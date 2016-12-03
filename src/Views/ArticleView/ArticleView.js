@@ -1,7 +1,10 @@
 import React from 'react';
+import $ from 'jquery';
 
 import './ArticleView.css';
 
+import ArticleCommentView from '../ArticleCommentView/ArticleCommentView';
+import ArticleGalleryView from '../ArticleGalleryView/ArticleGalleryView';
 import appStore from '../../Stores/AppStore';
 
 export default class ArticleView extends React.Component {
@@ -34,15 +37,25 @@ export default class ArticleView extends React.Component {
                     <h1>{selectedArticle.title}</h1>
                     <img className="lead-article-image"
                          src={(selectedArticleImages.lead) ? selectedArticleImages.lead._downloadURL : null}
-                         alt="Not found." />
+                         alt="Not found."/>
                     <p className="article-description">{selectedArticle.description}</p>
                     <p className="article-body">{selectedArticle.text}</p>
                     <div className="article-button-holder">
-                        <button>Article Gallery</button>
-                        <button>Comments</button>
+                        <button className="article-left-button"
+                                onClick={ArticleView.handleShowHideClicked.bind(this, '#article-gallery-section')}>
+                            <span>Show</span> Gallery
+                        </button>
+                        <button className="article-right-button"
+                                onClick={ArticleView.handleShowHideClicked.bind(this, '#article-comments-section')}>
+                            <span>Show</span> Comments
+                        </button>
                     </div>
-                    <div className="article-gallery-section"></div>
-                    <div className="article-comments-section"></div>
+                    <div id="article-gallery-section">
+                        <ArticleGalleryView imageObjectsList={this.state.selectedArticleImages.trailing}/>
+                    </div>
+                    <div id="article-comments-section">
+                        <ArticleCommentView />
+                    </div>
                 </div>
             )
         } else {
@@ -50,6 +63,9 @@ export default class ArticleView extends React.Component {
                 <div>No article selected</div>
             )
         }
+    }
 
+    static handleShowHideClicked(targetSelector) {
+        $(targetSelector).toggle();
     }
 }

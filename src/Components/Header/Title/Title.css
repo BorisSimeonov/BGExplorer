@@ -12,6 +12,7 @@
 
 .header-title span[color="blue"]{
     color: deepskyblue;
+    cursor: none;
 }
 
 .header-title span[color='blue']:hover {
