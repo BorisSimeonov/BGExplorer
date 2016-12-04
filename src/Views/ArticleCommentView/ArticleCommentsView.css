@@ -1,0 +1,50 @@
+.article-feedback-holder {
+    margin-top: 20px;
+    border: 5px ridge;
+    border-color: dimgray white;
+    border-radius: 10px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.article-feedback-holder h3 {
+    background-color: silver;
+    padding: 10px;
+    font-size: 1.0em;
+    border-bottom: 3px dotted greenyellow;
+    height: 18px;
+}
+
+span.article-comment-owner-name{
+    float: left;
+    color: green;
+    font-style: italic;
+    cursor: pointer;
+}
+
+span.article-comment-owner-name:hover {
+    color: lawngreen;
+}
+
+div.article-comment-text {
+    text-align: center;
+    padding: 7px 15px;
+}
+
+.article-comment-delete {
+    float: right;
+}
+
+.article-comment-delete button{
+    color: red;
+    cursor: pointer;
+    border: 2px outset lawngreen;
+    border-radius: 10px;
+}
+
+.article-comment-delete button:hover {
+    background-color: red;
+    color: white;
+    border-color: white;
+}

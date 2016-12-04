@@ -120,3 +120,15 @@ export function requestArticleByArticleId(articleId) {
         browserHistory.push('article');
     }
 }
+
+export function requestArticleFeedback(articleId) {
+    kinveyAjaxRequester.getArticleFeedbackById(articleId)
+        .then(requestSuccess);
+
+    function requestSuccess(commentsArray) {
+        dispatcher.dispatch({
+            type:"ARTICLE_FEEDBACK_LOADED",
+            commentsArray
+        });
+    }
+}

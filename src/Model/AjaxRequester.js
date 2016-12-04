@@ -94,6 +94,15 @@ let KinveyAjaxRequester = (function () {
         });
     };
 
+    let getArticleFeedbackById = function (articleId) {
+        return $.ajax({
+            method: 'GET',
+            url: base_url + 'appdata/' + app_key +
+            '/articles-feedback?query=' + JSON.stringify({'article_id':articleId}),
+            headers: getKinveyAuthHeaders()
+        });
+    };
+
     function getKinveyAuthHeaders() {
         return {
             Authorization: 'Kinvey ' + sessionStorage.getItem('authToken')
@@ -109,7 +118,8 @@ let KinveyAjaxRequester = (function () {
         getArticlesByLocationId,
         getArticleByArticleId,
         getLeadingImagesByArticleId,
-        getTrailingImagesByArticleId
+        getTrailingImagesByArticleId,
+        getArticleFeedbackById
     }
 })();
 

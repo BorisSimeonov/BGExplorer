@@ -10,7 +10,7 @@ export default class ArticleGalleryView extends React.Component {
                             src={imageObject._downloadURL} alt="Missing"
                             onClick={this.resizeSelectedImage.bind(this)}/>
             });
-            console.log(images);
+
             return (
                 <div className="gallery-holder">
                     <h1><span>Location</span> Gallery</h1>

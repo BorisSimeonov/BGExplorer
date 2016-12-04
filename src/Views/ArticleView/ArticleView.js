@@ -6,11 +6,14 @@ import './ArticleView.css';
 import ArticleCommentView from '../ArticleCommentView/ArticleCommentView';
 import ArticleGalleryView from '../ArticleGalleryView/ArticleGalleryView';
 import appStore from '../../Stores/AppStore';
+import * as componentActions from '../../Actions/componentActions';
 
 export default class ArticleView extends React.Component {
     constructor() {
         super();
         this.state = appStore.getSelectedArticleData();
+        this.getSelectedArticleFromStore =
+            this.getSelectedArticleFromStore.bind(this);
     }
 
     componentWillMount() {
@@ -23,15 +26,16 @@ export default class ArticleView extends React.Component {
     }
 
     getSelectedArticleFromStore() {
-        this.setState(appStore.getSelectedArticleData());
+        let newArticleState = appStore.getSelectedArticleData();
+        this.setState(newArticleState);
     }
 
     render() {
-        console.log(appStore.articlesData);
         let selectedArticle = this.state.selectedArticle;
         let selectedArticleImages = this.state.selectedArticleImages;
+        let selectedArticleComments = this.state.selectedArticleComments;
+
         if (selectedArticle) {
-            console.log(selectedArticle);
             return (
                 <div className="article-view-container">
                     <h1>{selectedArticle.title}</h1>
@@ -46,7 +50,7 @@ export default class ArticleView extends React.Component {
                             <span>Show</span> Gallery
                         </button>
                         <button className="article-right-button"
-                                onClick={ArticleView.handleShowHideClicked.bind(this, '#article-comments-section')}>
+                                onClick={ArticleView.requestArticleFeedback.bind(this, '#article-comments-section')}>
                             <span>Show</span> Comments
                         </button>
                     </div>
@@ -54,7 +58,7 @@ export default class ArticleView extends React.Component {
                         <ArticleGalleryView imageObjectsList={this.state.selectedArticleImages.trailing}/>
                     </div>
                     <div id="article-comments-section">
-                        <ArticleCommentView />
+                        <ArticleCommentView commentsArray={selectedArticleComments}/>
                     </div>
                 </div>
             )
@@ -63,6 +67,15 @@ export default class ArticleView extends React.Component {
                 <div>No article selected</div>
             )
         }
+    }
+
+    static requestArticleFeedback(targetSelector) {
+        let selectedArticle = appStore.articlesData.selectedArticle;
+        if(selectedArticle && appStore.articlesData.selectedArticleComments === null) {
+            componentActions.requestArticleFeedback(selectedArticle._id);
+        }
+
+        ArticleView.handleShowHideClicked(targetSelector);
     }
 
     static handleShowHideClicked(targetSelector) {

@@ -13,7 +13,8 @@ class AppStore extends EventEmitter {
             loadedLocations: [],
             loadedArticles: [],
             selectedArticle: null,
-            selectedArticleImages: {lead: null, trailing: []}
+            selectedArticleImages: {lead: null, trailing: []},
+            selectedArticleComments: null
         }
     }
 
@@ -28,7 +29,8 @@ class AppStore extends EventEmitter {
     getSelectedArticleData() {
         return {
             selectedArticle: this.articlesData.selectedArticle,
-            selectedArticleImages: this.articlesData.selectedArticleImages
+            selectedArticleImages: this.articlesData.selectedArticleImages,
+            selectedArticleComments: this.articlesData.selectedArticleComments
         };
     }
 
@@ -43,6 +45,7 @@ class AppStore extends EventEmitter {
     changeArticles(loadedArticles) {
         this.articlesData.loadedArticles = loadedArticles;
         this.articlesData.selectedArticle = null;
+        this.articlesData.selectedArticleComments = null;
 
         this.emit('articleChange');
     }
@@ -51,6 +54,7 @@ class AppStore extends EventEmitter {
         this.articlesData.selectedArticle = selectedArticle;
         this.articlesData.selectedArticleImages.lead = leadingImageURL;
         this.articlesData.selectedArticleImages.trailing = trailingImageURLs;
+        this.articlesData.selectedArticleComments = null;
 
         this.emit('articleChange');
     }
@@ -62,8 +66,17 @@ class AppStore extends EventEmitter {
         this.emit('userChange');
     }
 
+    changeSelectedArticleFeedback(commentsArray) {
+        if(commentsArray) {
+            this.articlesData.selectedArticleComments =
+                commentsArray;
+
+            this.emit('articleChange');
+        }
+    }
+
     handleActions(action) {
-        console.log('AppStore action.', action); //For testing and debugging
+        //console.log('AppStore action.', action); //For testing and debugging
         switch(action.type) {
             case 'LOGIN_USER':
                 this.changeUser(action.username, action.userId);
@@ -83,6 +96,9 @@ class AppStore extends EventEmitter {
                     action.leadingImageURL[0],
                     action.trailingImageURLs
                 );
+                break;
+            case 'ARTICLE_FEEDBACK_LOADED':
+                this.changeSelectedArticleFeedback(action.commentsArray);
                 break;
             default:
                 break;
