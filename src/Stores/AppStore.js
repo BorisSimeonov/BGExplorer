@@ -15,6 +15,9 @@ class AppStore extends EventEmitter {
             selectedArticle: null,
             selectedArticleImages: {lead: null, trailing: []},
             selectedArticleComments: null
+        };
+        this.websiteFeedback = {
+            loadedFeedbackMessages:[]
         }
     }
 
@@ -42,6 +45,10 @@ class AppStore extends EventEmitter {
             selectedArticleImages: this.articlesData.selectedArticleImages,
             selectedArticleComments: this.articlesData.selectedArticleComments
         };
+    }
+
+    getWebsiteFeedback(){
+        return this.websiteFeedback;
     }
 
     changeLocations(loadedLocations) {
@@ -91,6 +98,21 @@ class AppStore extends EventEmitter {
         }
     }
 
+    // changeWebsiteFeedback(feedbackMessagesArray) {
+    //     feedbackMessagesArray = feedbackMessagesArray.sort((a,b) => {
+    //         let aTimestamp = Number(a.comment.timestamp),
+    //             bTimestamp = Number(b.comment.timestamp);
+    //         return bTimestamp - aTimestamp;
+    //     });
+    //
+    //     if(feedbackMessagesArray) {
+    //         this.websiteFeedback.loadedFeedbackMessages =
+    //             feedbackMessagesArray;
+    //
+    //         this.emit('feedbackChange');
+    //     }
+    // }
+
     handleActions(action) {
         //console.log('AppStore action.', action); //For testing and debugging
         switch(action.type) {
@@ -117,6 +139,9 @@ class AppStore extends EventEmitter {
             case 'ARTICLE_FEEDBACK_LOADED':
                 this.changeSelectedArticleFeedback(action.commentsArray);
                 break;
+            // case 'WEBSITE_FEEDBACK_LOADED':
+            //     this.changeSelectedArticleFeedback(action.feedbackMessagesArray);
+            //     break;
             case 'ARTICLE_COMMENT_POSTED':
                 console.log('store:','Success');
                 break;

@@ -7,8 +7,28 @@ import appStore from '../../Stores/AppStore';
 import * as componentAcions from '../../Actions/componentActions';
 
 export default class FeedbackView extends React.Component {
+    constructor() {
+        super();
+        this.state = appStore.getWebsiteFeedback();
+        this.getFeedbackMessages =
+            this.getFeedbackMessages.bind(this);
+    }
+
+    componentWillMount() {
+        appStore.on('articleChange', this.getSelectedArticleFromStore);
+    }
+
+    componentWillUnmount() {
+        //prevents memory leaks by unbinding the event listener
+        appStore.removeListener('articleChange', this.getSelectedArticleFromStore);
+    }
+
+    getFeedbackMessages() {
+        let newFeedbackState = appStore.getWebsiteFeedback();
+        this.setState(newFeedbackState);
+    }
     render() {
-        let commentsArray = this.props.commentsArray;
+        let commentsArray = this.state.loadedFeedbackMessages;
         if (commentsArray && commentsArray.length) {
             commentsArray = commentsArray.map(commentObj =>
                 (<div key={commentObj._id} className="feedback-post">
@@ -46,10 +66,10 @@ export default class FeedbackView extends React.Component {
                         </div>
                         <input className="feedback-comment-button"
                                type="button" value={"Send Feedback"}
-                               onClick={FeedbackView.postNewComment.bind(this)}/>
+                               onClick={FeedbackView.postNewFeedback.bind(this)}/>
                         <input className="feedback-comment-button"
                                type="button" value={"Refresh Feedback"}
-                               onClick={FeedbackView.refreshArticleComments.bind(this)}
+                               onClick={FeedbackView.refreshFeedbackComments.bind(this)}
                         />
                     </div>
                     {commentsArray}
@@ -62,14 +82,14 @@ export default class FeedbackView extends React.Component {
         }
     }
 
-    static postNewComment() {
+    static postNewFeedback() {
         let textArea = $('#feedback-new-comment-area');
-        let newCommentText = textArea.val().trim().replace(/\s+/g, ' ');
+        let newFeedbackText = textArea.val().trim().replace(/\s+/g, ' ');
 
-        if (newCommentText) {
+        if (newFeedbackText) {
             componentAcions.postNewArticleFeedback(
                 appStore.articlesData.selectedArticle.article_id,
-                newCommentText,
+                newFeedbackText,
                 appStore.userData.username,
                 Date.now()
             );
@@ -90,8 +110,7 @@ export default class FeedbackView extends React.Component {
             commentObject._id, commentObject.article_id);
     }
 
-    static refreshArticleComments() {
-        let currentArticleId = appStore.articlesData.selectedArticle._id;
-        componentAcions.requestArticleFeedback(currentArticleId);
+    static refreshFeedbackComments() {
+        componentAcions.requestFeedbackMessages();
     }
 }

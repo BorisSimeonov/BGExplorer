@@ -129,6 +129,15 @@ let KinveyAjaxRequester = (function () {
         };
     }
 
+    let requestRefreshFeedbackMessages = function () {
+        return $.ajax({
+            method: 'GET',
+            url: base_url + 'appdata/' +
+            app_key + '/user-feedback',
+            headers: getKinveyAuthHeaders()
+        });
+    };
+
     return {
         loginUser,
         logoutUser,
@@ -141,7 +150,8 @@ let KinveyAjaxRequester = (function () {
         getTrailingImagesByArticleId,
         getArticleFeedbackById,
         postNewArticleFeedback,
-        deleteArticleCommentById
+        deleteArticleCommentById,
+        requestRefreshFeedbackMessages
     }
 })();
 

@@ -133,6 +133,20 @@ export function requestArticleFeedback(articleId) {
     }
 }
 
+export function requestFeedbackMessages() {
+    kinveyAjaxRequester.requestRefreshFeedbackMessages()
+        .then(requestSuccess);
+
+    function requestSuccess(feedbackMessagesArray) {
+        dispatcher.dispatch({
+            type: "WEBSITE_FEEDBACK_LOADED",
+            feedbackMessagesArray
+        });
+    }
+}
+
+
+
 export function postNewArticleFeedback(
     articleId, commentText, authorName, timestamp) {
     let commentObject = {
