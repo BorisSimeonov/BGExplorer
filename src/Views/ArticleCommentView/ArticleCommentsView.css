@@ -96,3 +96,13 @@ div.article-comment-text {
     font-style: italic;
     display: none;
 }
+
+.article-comment-time {
+    font-size: 0.7em;
+    padding: 3px 5px;
+    background-color: dimgray;
+    color: lawngreen;
+    font-style: italic;
+    border-bottom: 1px dotted lawngreen;
+    text-align: left;
+}

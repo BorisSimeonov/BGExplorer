@@ -6,9 +6,6 @@ import './ArticleCommentsView.css';
 import appStore from '../../Stores/AppStore';
 import * as componentAcions from '../../Actions/componentActions';
 
-//TODO: implement add comment logic and delete comments functionality for the posts
-//TODO: implement sorting logic for comments before rendering on page
-
 export default class ArticleCommentView extends React.Component {
     render() {
         let commentsArray = this.props.commentsArray;
@@ -21,9 +18,16 @@ export default class ArticleCommentView extends React.Component {
                                 (commentObj._acl.creator === appStore.userData.userId) ?
                                     <input type="button" onClick={ArticleCommentView
                                         .deleteArticleComment.bind(this, commentObj)}
-                                                    value="Delete"/> : null
+                                           value="Delete"/> : null
                             }</span>
                         </h3>
+                        <div className="article-comment-time">{
+                            <span>
+                                {
+                                    new Date(Number(commentObj.comment.timestamp)).toString()
+                                }
+                            </span>
+                        }</div>
                         <div className="article-comment-text">{commentObj.comment.text}</div>
 
                     </div>
@@ -34,7 +38,6 @@ export default class ArticleCommentView extends React.Component {
         if (sessionStorage.getItem('authToken')) {
             return (
                 <form className="article-feedback-holder">
-                    {commentsArray}
                     <div className="article-comment-composer">
                         <div>
                             <h3>Add new comment:</h3>
@@ -46,6 +49,7 @@ export default class ArticleCommentView extends React.Component {
                                onClick={ArticleCommentView.postNewComment.bind(this)}/>
                         <input className="article-comment-button" type="button" value={"Refresh Comments"}/>
                     </div>
+                    {commentsArray}
                 </form>
             )
         } else {

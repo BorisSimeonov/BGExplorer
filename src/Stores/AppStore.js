@@ -67,6 +67,13 @@ class AppStore extends EventEmitter {
     }
 
     changeSelectedArticleFeedback(commentsArray) {
+        console.log(commentsArray);
+        commentsArray = commentsArray.sort((a,b) => {
+            let aTimestamp = Number(a.comment.timestamp),
+                bTimestamp = Number(b.comment.timestamp);
+            return bTimestamp - aTimestamp;
+        });
+
         if(commentsArray) {
             this.articlesData.selectedArticleComments =
                 commentsArray;
