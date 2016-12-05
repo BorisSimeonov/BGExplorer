@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
-//import './FeedbackView.css';
+import './FeedbackView.css';
 
 import appStore from '../../Stores/AppStore';
 import * as componentAcions from '../../Actions/componentActions';
@@ -88,8 +88,7 @@ export default class FeedbackView extends React.Component {
         let newFeedbackText = textArea.val().trim().replace(/\s+/g, ' ');
 
         if (newFeedbackText) {
-            componentAcions.postNewArticleFeedback(
-                appStore.articlesData.selectedArticle.article_id,
+            componentAcions.postNewFeedback(
                 newFeedbackText,
                 appStore.userData.username,
                 Date.now()

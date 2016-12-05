@@ -172,12 +172,21 @@ export function postNewArticleFeedback(
         }
     };
 
-    kinveyAjaxRequester.postNewArticleFeedback(articleId, commentObject)
+        kinveyAjaxRequester.postNewArticleFeedback(articleId, commentObject)
         .then(postSuccess.bind(this));
 
     function postSuccess() {
         App.showInfo('Comment is posted.');
         this.requestArticleFeedback(articleId);
+    }
+}
+
+export function postNewFeedback(feedback_text, user_name, timestamp) {
+    kinveyAjaxRequester.sendFeedbackRequest(feedback_text, user_name, timestamp)
+        .then(requestSuccess);
+    function requestSuccess() {
+        App.showInfo('Thank you for your feedback.');
+        requestFeedbackMessages()
     }
 }
 
