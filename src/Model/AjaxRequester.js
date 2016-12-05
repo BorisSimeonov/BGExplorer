@@ -129,6 +129,23 @@ let KinveyAjaxRequester = (function () {
         };
     }
 
+    let requestArticleNamesContainingSubstring = function (nameSubstring) {
+        return $.ajax({
+            method: 'GET',
+            url: base_url + 'appdata/' + app_key +
+            '/articles?query=' + JSON.stringify(
+                {
+                    $or: [
+                        {title: {$regex: '^.*' + nameSubstring.toLowerCase() + '.*'}},
+                        {title: {$regex: '^.*' + nameSubstring.toUpperCase() + '.*'}},
+                        {title: {$regex: '^.*' + nameSubstring + '.*'}}
+                    ]
+                }
+            ),
+            headers: getKinveyAuthHeaders()
+        });
+    };
+
     let requestRefreshFeedbackMessages = function () {
         return $.ajax({
             method: 'GET',
@@ -151,7 +168,8 @@ let KinveyAjaxRequester = (function () {
         getArticleFeedbackById,
         postNewArticleFeedback,
         deleteArticleCommentById,
-        requestRefreshFeedbackMessages
+        requestRefreshFeedbackMessages,
+        requestArticleNamesContainingSubstring
     }
 })();
 

@@ -145,7 +145,21 @@ export function requestFeedbackMessages() {
     }
 }
 
+export function requestArticlesByTitleSubstring(titleSubstring) {
+    kinveyAjaxRequester.requestArticleNamesContainingSubstring(titleSubstring)
+        .then(requestSuccess);
 
+    function requestSuccess(articles) {
+        dispatcher.dispatch({
+            type: 'NEW_SEARCH_RESULT',
+            results: articles
+        });
+    }
+}
+
+export function requestSearchRoute() {
+    browserHistory.push('search');
+}
 
 export function postNewArticleFeedback(
     articleId, commentText, authorName, timestamp) {

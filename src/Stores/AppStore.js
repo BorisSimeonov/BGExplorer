@@ -1,4 +1,4 @@
-import { EventEmitter } from 'events';
+import {EventEmitter} from 'events';
 
 import dispatcher from '../Dispatcher/Dispatcher';
 
@@ -17,8 +17,12 @@ class AppStore extends EventEmitter {
             selectedArticleComments: null
         };
         this.websiteFeedback = {
-            loadedFeedbackMessages:[]
-        }
+            loadedFeedbackMessages: []
+        };
+
+        this.currentSearchResult = {
+            results: null
+        };
     }
 
     getDefaultArticleData() {
@@ -47,7 +51,7 @@ class AppStore extends EventEmitter {
         };
     }
 
-    getWebsiteFeedback(){
+    getWebsiteFeedback() {
         return this.websiteFeedback;
     }
 
@@ -84,13 +88,13 @@ class AppStore extends EventEmitter {
     }
 
     changeSelectedArticleFeedback(commentsArray) {
-        commentsArray = commentsArray.sort((a,b) => {
+        commentsArray = commentsArray.sort((a, b) => {
             let aTimestamp = Number(a.comment.timestamp),
                 bTimestamp = Number(b.comment.timestamp);
             return bTimestamp - aTimestamp;
         });
 
-        if(commentsArray) {
+        if (commentsArray) {
             this.articlesData.selectedArticleComments =
                 commentsArray;
 
@@ -99,13 +103,13 @@ class AppStore extends EventEmitter {
     }
 
     changeWebsiteFeedback(feedbackMessagesArray) {
-        feedbackMessagesArray = feedbackMessagesArray.sort((a,b) => {
+        feedbackMessagesArray = feedbackMessagesArray.sort((a, b) => {
             let aTimestamp = Number(a.timestamp),
                 bTimestamp = Number(b.timestamp);
             return bTimestamp - aTimestamp;
         });
 
-        if(feedbackMessagesArray) {
+        if (feedbackMessagesArray) {
             this.websiteFeedback.loadedFeedbackMessages =
                 feedbackMessagesArray;
 
@@ -113,9 +117,19 @@ class AppStore extends EventEmitter {
         }
     }
 
+    updateCurrentSearchResult(matchedArticles) {
+        this.currentSearchResult.results = matchedArticles;
+
+        this.emit('searchResultChange');
+    }
+
+    resetAppStoreSearchResultState() {
+        this.currentSearchResult.results = null;
+    }
+
     handleActions(action) {
         //console.log('AppStore action.', action); //For testing and debugging
-        switch(action.type) {
+        switch (action.type) {
             case 'LOGIN_USER':
                 this.changeUser(action.username, action.userId);
                 break;
@@ -142,8 +156,8 @@ class AppStore extends EventEmitter {
             case 'WEBSITE_FEEDBACK_LOADED':
                 this.changeWebsiteFeedback(action.feedbackMessagesArray);
                 break;
-            case 'ARTICLE_COMMENT_POSTED':
-                console.log('store:','Success');
+            case 'NEW_SEARCH_RESULT':
+                this.updateCurrentSearchResult(action.results);
                 break;
             default:
                 break;
@@ -156,8 +170,8 @@ const appStore = new AppStore();
 dispatcher.register(appStore.handleActions.bind(appStore));
 
 /*
-//For in-browser testing
-window.dispatcher = dispatcher;
-window.appStore = appStore;*/
+ //For in-browser testing
+ window.dispatcher = dispatcher;
+ window.appStore = appStore;*/
 
 export default appStore;

@@ -31,6 +31,7 @@ export default class LocationsView extends React.Component {
     render() {
         let natureIcon = <img alt="Section:" src={require('../../Resources/Images/nature.png')}/>;
         let villagesIcon = <img alt="Section:" src={require('../../Resources/Images/villages.png')}/>;
+        let searchIcon = <img alt="Section:" src={require('../../Resources/Images/search.png')}/>;
 
         if (sessionStorage.getItem('authToken')) {
             return (
@@ -43,6 +44,10 @@ export default class LocationsView extends React.Component {
                         <a className="locations-menu-item village"
                            onClick={LocationsView.requestAllLocationsOfType.bind(this, "municipality")}>
                             {villagesIcon}
+                        </a>
+                        <a className="locations-menu-item search"
+                           onClick={LocationsView.requestAllLocationsOfType.bind(this, "search")}>
+                            {searchIcon}
                         </a>
                     </div>
                     <div>
@@ -95,6 +100,9 @@ export default class LocationsView extends React.Component {
                 break;
             case 'municipality':
                 componentActions.requestMunicipalityNames();
+                break;
+            case 'search':
+                componentActions.requestSearchRoute();
                 break;
             default:
                 break;

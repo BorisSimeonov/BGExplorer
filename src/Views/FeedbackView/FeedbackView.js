@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
-import './FeedbackView.css';
+//import './FeedbackView.css';
 
 import appStore from '../../Stores/AppStore';
 import * as componentAcions from '../../Actions/componentActions';

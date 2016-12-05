@@ -10,6 +10,7 @@ import HomeView from './Views/HomeView/HomeView';
 import LocationsView from './Views/LocationsView/LocationsView';
 import LoginView from './Views/LoginView/LoginView';
 import RegisterView from './Views/RegisterView/RegisterView';
+import SearchView from './Views/SearchView/SearchView';
 
 ReactDOM.render((
     <Router history={browserHistory}>
@@ -21,6 +22,7 @@ ReactDOM.render((
             <Route path="locations" component={LocationsView}/>
             <Route path="feedback" component={FeedbackView}/>
             <Route path="article" component={ArticleView}/>
+            <Route path="search" component={SearchView}/>
         </Route>
     </Router>),
   document.getElementById('wrapper')
