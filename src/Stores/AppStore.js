@@ -18,6 +18,16 @@ class AppStore extends EventEmitter {
         }
     }
 
+    getDefaultArticleData() {
+        return {
+            loadedLocations: [],
+            loadedArticles: [],
+            selectedArticle: null,
+            selectedArticleImages: {lead: null, trailing: []},
+            selectedArticleComments: null
+        }
+    }
+
     getUserInfo() {
         return this.userData;
     }
@@ -35,9 +45,8 @@ class AppStore extends EventEmitter {
     }
 
     changeLocations(loadedLocations) {
+        this.articlesData = this.getDefaultArticleData();
         this.articlesData.loadedLocations = loadedLocations;
-        this.articlesData.loadedArticles = [];
-        this.articlesData.selectedArticle = null;
 
         this.emit('articleChange');
     }
@@ -62,6 +71,7 @@ class AppStore extends EventEmitter {
     changeUser(username, userId) {
         this.userData.username = username;
         this.userData.userId = userId;
+        this.articlesData = this.getDefaultArticleData();
 
         this.emit('userChange');
     }
@@ -88,6 +98,7 @@ class AppStore extends EventEmitter {
                 this.changeUser(action.username, action.userId);
                 break;
             case 'LOGOUT_USER':
+                sessionStorage.clear();
                 this.changeUser(null, null);
                 break;
             case 'LOCATIONS_CHANGE':
