@@ -67,7 +67,6 @@ class AppStore extends EventEmitter {
     }
 
     changeSelectedArticleFeedback(commentsArray) {
-        console.log(commentsArray);
         commentsArray = commentsArray.sort((a,b) => {
             let aTimestamp = Number(a.comment.timestamp),
                 bTimestamp = Number(b.comment.timestamp);
@@ -120,8 +119,9 @@ const appStore = new AppStore();
 
 dispatcher.register(appStore.handleActions.bind(appStore));
 
+/*
+//For in-browser testing
 window.dispatcher = dispatcher;
-
-window.appStore = appStore;
+window.appStore = appStore;*/
 
 export default appStore;

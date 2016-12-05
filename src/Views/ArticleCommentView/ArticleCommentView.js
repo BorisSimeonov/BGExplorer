@@ -47,7 +47,10 @@ export default class ArticleCommentView extends React.Component {
                         <input className="article-comment-button"
                                type="button" value={"Post Comment"}
                                onClick={ArticleCommentView.postNewComment.bind(this)}/>
-                        <input className="article-comment-button" type="button" value={"Refresh Comments"}/>
+                        <input className="article-comment-button"
+                               type="button" value={"Refresh Comments"}
+                               onClick={ArticleCommentView.refreshArticleComments.bind(this)}
+                        />
                     </div>
                     {commentsArray}
                 </form>
@@ -85,5 +88,10 @@ export default class ArticleCommentView extends React.Component {
     static deleteArticleComment(commentObject) {
         componentAcions.deleteArticleComment(
             commentObject._id, commentObject.article_id);
+    }
+
+    static refreshArticleComments() {
+        let currentArticleId = appStore.articlesData.selectedArticle._id;
+        componentAcions.requestArticleFeedback(currentArticleId);
     }
 }

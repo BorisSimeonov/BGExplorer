@@ -16,6 +16,15 @@
     height: 18px;
 }
 
+.article-feedback-post {
+    border:1px groove;
+    border-color: silver white;
+}
+
+.article-feedback-post:hover {
+    border:2px outset lawngreen;
+}
+
 span.article-comment-owner-name{
     float: left;
     color: green;
