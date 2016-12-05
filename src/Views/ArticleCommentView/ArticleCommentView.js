@@ -19,9 +19,9 @@ export default class ArticleCommentView extends React.Component {
                             <span
                                 className="article-comment-delete">{
                                 (commentObj._acl.creator === appStore.userData.userId) ?
-                                    <button onClick={ArticleCommentView.deleteArticleComment.bind(this)}>
-                                        Delete
-                                    </button> : null
+                                    <input type="button" onClick={ArticleCommentView
+                                        .deleteArticleComment.bind(this, commentObj)}
+                                                    value="Delete"/> : null
                             }</span>
                         </h3>
                         <div className="article-comment-text">{commentObj.comment.text}</div>
@@ -57,7 +57,7 @@ export default class ArticleCommentView extends React.Component {
 
     static postNewComment() {
         let textArea = $('#article-new-comment-area');
-        let newCommentText = textArea.val();
+        let newCommentText = textArea.val().trim().replace(/\s+/g, ' ');
 
         if (newCommentText) {
             componentAcions.postNewArticleFeedback(
@@ -78,8 +78,8 @@ export default class ArticleCommentView extends React.Component {
         }
     }
 
-    static deleteArticleComment(event) {
-        event.preventDefault();
-        console.log('delete');
+    static deleteArticleComment(commentObject) {
+        componentAcions.deleteArticleComment(
+            commentObject._id, commentObject.article_id);
     }
 }

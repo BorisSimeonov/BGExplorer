@@ -114,6 +114,15 @@ let KinveyAjaxRequester = (function () {
         })
     };
 
+    let deleteArticleCommentById = function (commentId) {
+      return $.ajax({
+          method: 'DELETE',
+          url: base_url + 'appdata/' + app_key +
+              '/articles-feedback/' + commentId,
+          headers: getKinveyAuthHeaders()
+      })
+    };
+
     function getKinveyAuthHeaders() {
         return {
             Authorization: 'Kinvey ' + sessionStorage.getItem('authToken')
@@ -131,7 +140,8 @@ let KinveyAjaxRequester = (function () {
         getLeadingImagesByArticleId,
         getTrailingImagesByArticleId,
         getArticleFeedbackById,
-        postNewArticleFeedback
+        postNewArticleFeedback,
+        deleteArticleCommentById
     }
 })();
 

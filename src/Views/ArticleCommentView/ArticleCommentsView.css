@@ -36,14 +36,14 @@ div.article-comment-text {
     float: right;
 }
 
-.article-comment-delete button{
+.article-comment-delete input[type='button']{
     color: red;
     cursor: pointer;
     border: 2px outset lawngreen;
     border-radius: 10px;
 }
 
-.article-comment-delete button:hover {
+.article-comment-delete input[type='button']:hover {
     background-color: red;
     color: white;
     border-color: white;

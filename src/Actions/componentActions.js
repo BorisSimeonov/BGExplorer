@@ -133,7 +133,8 @@ export function requestArticleFeedback(articleId) {
     }
 }
 
-export function postNewArticleFeedback(articleId, commentText, authorName, timestamp) {
+export function postNewArticleFeedback(
+    articleId, commentText, authorName, timestamp) {
     let commentObject = {
         article_id: articleId,
         comment: {
@@ -149,5 +150,15 @@ export function postNewArticleFeedback(articleId, commentText, authorName, times
     function postSuccess() {
         App.showInfo('Comment is posted.');
         this.requestArticleFeedback(articleId);
+    }
+}
+
+export function deleteArticleComment(commentId, selectedArticleId) {
+    kinveyAjaxRequester.deleteArticleCommentById(commentId)
+        .then(deleteSuccess.bind(this));
+
+    function deleteSuccess() {
+        App.showInfo('Comment deleted.');
+        this.requestArticleFeedback(selectedArticleId);
     }
 }
