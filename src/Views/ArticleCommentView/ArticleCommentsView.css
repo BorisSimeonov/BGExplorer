@@ -73,7 +73,7 @@ div.article-comment-text {
     background: -moz-linear-gradient(bottom right, white, dimgray); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to bottom right, white, dimgray); /* Standard syntax */
     font-family: Bangers, sans-serif;
-    font-size: 1.2em;
+    font-size: 1.0em;
     color: white;
     cursor: pointer;
     border: 2px outset white;
@@ -88,4 +88,11 @@ div.article-comment-text {
     background: -moz-linear-gradient(top right, dimgray, white); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to top right, dimgray, white); /* Standard syntax */
     color: darkviolet;
+}
+
+.comments-info-span {
+    color: red;
+    font-size: 0.8em;
+    font-style: italic;
+    display: none;
 }

@@ -100,6 +100,9 @@ class AppStore extends EventEmitter {
             case 'ARTICLE_FEEDBACK_LOADED':
                 this.changeSelectedArticleFeedback(action.commentsArray);
                 break;
+            case 'ARTICLE_COMMENT_POSTED':
+                console.log('store:','Success');
+                break;
             default:
                 break;
         }

@@ -1,7 +1,7 @@
 import dispatcher from '../Dispatcher/Dispatcher';
 import kinveyAjaxRequester from '../Model/AjaxRequester';
 import App from '../App';
-import { browserHistory } from 'react-router';
+import {browserHistory} from 'react-router';
 
 export function loginUser(username, password) {
     kinveyAjaxRequester.loginUser(
@@ -55,7 +55,7 @@ export function requestMountainNames() {
 
     function requestSuccess(mountainLocationNames) {
         let length = mountainLocationNames.length;
-        if(length) {
+        if (length) {
             dispatcher.dispatch({
                 type: 'LOCATIONS_CHANGE',
                 loadedLocations: mountainLocationNames
@@ -73,7 +73,7 @@ export function requestMunicipalityNames() {
 
     function requestSuccess(mountainLocationNames) {
         let length = mountainLocationNames.length;
-        if(length) {
+        if (length) {
             dispatcher.dispatch({
                 type: 'LOCATIONS_CHANGE',
                 loadedLocations: mountainLocationNames
@@ -90,7 +90,7 @@ export function requestArticlesByLocationId(locationId) {
         .then(requestSuccess);
     function requestSuccess(articlesArray) {
         let length = articlesArray.length;
-        if(length) {
+        if (length) {
             dispatcher.dispatch({
                 type: 'ARTICLES_CHANGE',
                 loadedArticles: articlesArray
@@ -127,8 +127,27 @@ export function requestArticleFeedback(articleId) {
 
     function requestSuccess(commentsArray) {
         dispatcher.dispatch({
-            type:"ARTICLE_FEEDBACK_LOADED",
+            type: "ARTICLE_FEEDBACK_LOADED",
             commentsArray
         });
+    }
+}
+
+export function postNewArticleFeedback(articleId, commentText, authorName, timestamp) {
+    let commentObject = {
+        article_id: articleId,
+        comment: {
+            text: commentText,
+            from: authorName,
+            timestamp
+        }
+    };
+
+    kinveyAjaxRequester.postNewArticleFeedback(articleId, commentObject)
+        .then(postSuccess.bind(this));
+
+    function postSuccess() {
+        App.showInfo('Comment is posted.');
+        this.requestArticleFeedback(articleId);
     }
 }
