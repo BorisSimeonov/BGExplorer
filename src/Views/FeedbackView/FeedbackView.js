@@ -12,15 +12,16 @@ export default class FeedbackView extends React.Component {
         this.state = appStore.getWebsiteFeedback();
         this.getFeedbackMessages =
             this.getFeedbackMessages.bind(this);
+
     }
 
     componentWillMount() {
-        appStore.on('articleChange', this.getSelectedArticleFromStore);
+        appStore.on('feedbackChange', this.getFeedbackMessages);
     }
 
     componentWillUnmount() {
         //prevents memory leaks by unbinding the event listener
-        appStore.removeListener('articleChange', this.getSelectedArticleFromStore);
+        appStore.removeListener('feedbackChange', this.getFeedbackMessages);
     }
 
     getFeedbackMessages() {
@@ -28,27 +29,27 @@ export default class FeedbackView extends React.Component {
         this.setState(newFeedbackState);
     }
     render() {
-        let commentsArray = this.state.loadedFeedbackMessages;
-        if (commentsArray && commentsArray.length) {
-            commentsArray = commentsArray.map(commentObj =>
-                (<div key={commentObj._id} className="feedback-post">
-                        <h3><span className="feedback-owner-name">{commentObj.comment.from}</span>
+        let feedbackMessagesArray = this.state.loadedFeedbackMessages;
+        if (feedbackMessagesArray && feedbackMessagesArray.length) {
+            feedbackMessagesArray = feedbackMessagesArray.map(feedbackObj =>
+                (<div key={feedbackObj._id} className="feedback-post">
+                        <h3><span className="feedback-owner-name">{feedbackObj.user_name}</span>
                             <span
                                 className="feedback-delete">{
-                                (commentObj._acl.creator === appStore.userData.userId) ?
+                                (feedbackObj._acl.creator === appStore.userData.userId) ?
                                     <input type="button" onClick={FeedbackView
-                                        .deleteArticleComment.bind(this, commentObj)}
+                                        .deleteArticleComment.bind(this, feedbackObj)}
                                            value="Delete"/> : null
                             }</span>
                         </h3>
                         <div className="feedback-time">{
                             <span>
                                 {
-                                    new Date(Number(commentObj.comment.timestamp)).toString()
+                                    new Date(Number(feedbackObj.timestamp)).toString()
                                 }
                             </span>
                         }</div>
-                        <div className="feedback-text">{commentObj.comment.text}</div>
+                        <div className="feedback-text">{feedbackObj.feedback_text}</div>
 
                     </div>
                 )
@@ -72,7 +73,7 @@ export default class FeedbackView extends React.Component {
                                onClick={FeedbackView.refreshFeedbackComments.bind(this)}
                         />
                     </div>
-                    {commentsArray}
+                    {feedbackMessagesArray}
                 </form>
             )
         } else {
