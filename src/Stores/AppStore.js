@@ -98,20 +98,20 @@ class AppStore extends EventEmitter {
         }
     }
 
-    // changeWebsiteFeedback(feedbackMessagesArray) {
-    //     feedbackMessagesArray = feedbackMessagesArray.sort((a,b) => {
-    //         let aTimestamp = Number(a.comment.timestamp),
-    //             bTimestamp = Number(b.comment.timestamp);
-    //         return bTimestamp - aTimestamp;
-    //     });
-    //
-    //     if(feedbackMessagesArray) {
-    //         this.websiteFeedback.loadedFeedbackMessages =
-    //             feedbackMessagesArray;
-    //
-    //         this.emit('feedbackChange');
-    //     }
-    // }
+    changeWebsiteFeedback(feedbackMessagesArray) {
+        feedbackMessagesArray = feedbackMessagesArray.sort((a,b) => {
+            let aTimestamp = Number(a.timestamp),
+                bTimestamp = Number(b.timestamp);
+            return bTimestamp - aTimestamp;
+        });
+
+        if(feedbackMessagesArray) {
+            this.websiteFeedback.loadedFeedbackMessages =
+                feedbackMessagesArray;
+
+            this.emit('feedbackChange');
+        }
+    }
 
     handleActions(action) {
         //console.log('AppStore action.', action); //For testing and debugging
@@ -139,9 +139,9 @@ class AppStore extends EventEmitter {
             case 'ARTICLE_FEEDBACK_LOADED':
                 this.changeSelectedArticleFeedback(action.commentsArray);
                 break;
-            // case 'WEBSITE_FEEDBACK_LOADED':
-            //     this.changeSelectedArticleFeedback(action.feedbackMessagesArray);
-            //     break;
+            case 'WEBSITE_FEEDBACK_LOADED':
+                this.changeWebsiteFeedback(action.feedbackMessagesArray);
+                break;
             case 'ARTICLE_COMMENT_POSTED':
                 console.log('store:','Success');
                 break;
