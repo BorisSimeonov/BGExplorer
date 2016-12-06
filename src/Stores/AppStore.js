@@ -136,6 +136,7 @@ class AppStore extends EventEmitter {
             case 'LOGOUT_USER':
                 sessionStorage.clear();
                 this.changeUser(null, null);
+                this.changeWebsiteFeedback([]);
                 break;
             case 'LOCATIONS_CHANGE':
                 this.changeLocations(action.loadedLocations);

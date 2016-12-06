@@ -1,0 +1,117 @@
+.feedback-holder {
+    margin-top: 20px;
+    border: 5px ridge;
+    border-color: dimgray white;
+    border-radius: 10px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feedback-holder h3 {
+    background-color: silver;
+    padding: 10px;
+    font-size: 1.0em;
+    border-bottom: 3px dotted greenyellow;
+    height: 18px;
+}
+
+.feedback-post {
+    border:1px groove;
+    border-color: silver white;
+}
+
+.feedback-post:hover {
+    border:2px outset lawngreen;
+}
+
+span.feedback-owner-name{
+    float: left;
+    color: green;
+    font-style: italic;
+    cursor: pointer;
+}
+
+span.feedback-owner-name:hover {
+    color: lawngreen;
+}
+
+div.feedback-text {
+    text-align: center;
+    padding: 7px 15px;
+}
+
+.feedback-delete {
+    float: right;
+}
+
+.feedback-delete input[type='button']{
+    color: red;
+    cursor: pointer;
+    border: 2px outset lawngreen;
+    border-radius: 10px;
+}
+
+.feedback-delete input[type='button']:hover {
+    background-color: red;
+    color: white;
+    border-color: white;
+}
+
+.feedback-comment-composer textarea {
+    max-width: 80%;
+    min-width: 80%;
+    min-height: 100px;
+    font-size: 1.2em;
+    border: 2px ridge;
+    border-color: white dimgray;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.feedback-comment-composer h3 {
+    margin-bottom: 5px;
+}
+
+.feedback-comment-button {
+    margin: 10px;
+    padding: 10px 25px;
+    background: dimgray no-repeat center center fixed; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, white, dimgray); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, white, dimgray); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, white, dimgray); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, white, dimgray); /* Standard syntax */
+    font-family: Bangers, sans-serif;
+    font-size: 1.0em;
+    color: white;
+    cursor: pointer;
+    border: 2px outset white;
+    border-radius: 50%;
+    width: 30%;
+}
+
+.feedback-comment-button:hover {
+    background: dimgray no-repeat center center fixed; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left bottom, dimgray, white); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(top right, dimgray, white); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(top right, dimgray, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to top right, dimgray, white); /* Standard syntax */
+    color: darkviolet;
+}
+
+.feedback-info-span {
+    color: red;
+    font-size: 0.8em;
+    font-style: italic;
+    display: none;
+}
+
+.feedback-time {
+    font-size: 0.7em;
+    padding: 3px 5px;
+    background-color: dimgray;
+    color: lawngreen;
+    font-style: italic;
+    border-bottom: 1px dotted lawngreen;
+    text-align: left;
+}

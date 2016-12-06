@@ -17,7 +17,6 @@ export default class FeedbackView extends React.Component {
 
     componentWillMount() {
         appStore.on('feedbackChange', this.getFeedbackMessages);
-        componentAcions.requestFeedbackMessages();
     }
 
     componentWillUnmount() {
@@ -60,6 +59,7 @@ export default class FeedbackView extends React.Component {
         if (sessionStorage.getItem('authToken')) {
             return (
                 <form className="feedback-holder">
+                    {feedbackMessagesArray}
                     <div className="feedback-comment-composer">
                         <div>
                             <h3>Add new feedback message:</h3>
@@ -70,11 +70,10 @@ export default class FeedbackView extends React.Component {
                                type="button" value={"Send Feedback"}
                                onClick={FeedbackView.postNewFeedback.bind(this)}/>
                         <input className="feedback-comment-button"
-                               type="button" value={"Refresh Feedback"}
+                               type="button" value={"Show Feedback Messages"}
                                onClick={FeedbackView.refreshFeedbackComments.bind(this)}
                         />
                     </div>
-                    {feedbackMessagesArray}
                 </form>
             )
         } else {
