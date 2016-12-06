@@ -48,7 +48,7 @@
 .gallery-holder {
     border: 8px ridge;
     border-color: dimgray white;
-    border-radius: 10%;
+    border-radius: 10px;
     width: 90%;
     margin: 10px auto;
 }

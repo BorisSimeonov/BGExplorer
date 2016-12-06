@@ -1,6 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
 
+import './SearchView.css';
+
 import appStore from '../../Stores/AppStore';
 import * as componentActions from '../../Actions/componentActions';
 
@@ -28,14 +30,17 @@ export default class SearchView extends React.Component {
         let foundResults = null;
         if (this.state.results) {
             foundResults = this.state.results.map(foundArticle => (
-                <li key={foundArticle._id} onClick={SearchView.requestSelectedArticleById.bind(this, foundArticle._id)}>
+                <li key={foundArticle._id} onClick={
+                    SearchView.requestSelectedArticleById.bind(this, foundArticle._id)
+                }>
                     {foundArticle.title}
                 </li>
             ));
         }
 
         return (
-            <div>
+            <div className="article-search-holder">
+                <h3>Search for article by article name</h3>
                 <input id="article-search-input" type="text" width="80%"
                        onChange={
                            SearchView.makeRejexKinveyRequest.bind(this)

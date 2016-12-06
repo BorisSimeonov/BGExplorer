@@ -1,0 +1,34 @@
+.article-search-holder h3 {
+    font-size: 1.2em;
+    margin: 10px;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+#article-search-input {
+    width: 80%;
+    text-align: center;
+    font-size: 1.0em;
+    border: 2px ridge;
+    border-color: dimgray white;
+}
+
+#search-found-articles-ul li {
+    width: 80%;
+    padding: 5px 0;
+    margin: 0 auto;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+}
+
+#search-found-articles-ul li:last-child {
+    border-bottom: 1px solid gray;
+    border-radius: 0 0 10px 10px;
+}
+
+#search-found-articles-ul li:hover {
+    cursor: pointer;
+    padding: 7px 0;
+    background-color: deepskyblue;
+    font-style: italic;
+}
