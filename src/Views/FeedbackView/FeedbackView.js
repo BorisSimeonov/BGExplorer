@@ -28,6 +28,7 @@ export default class FeedbackView extends React.Component {
         let newFeedbackState = appStore.getWebsiteFeedback();
         this.setState(newFeedbackState);
     }
+
     render() {
         let feedbackMessagesArray = this.state.loadedFeedbackMessages;
         if (feedbackMessagesArray && feedbackMessagesArray.length) {
