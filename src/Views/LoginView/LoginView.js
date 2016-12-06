@@ -30,5 +30,6 @@ export default class LoginView extends React.Component {
             this.usernameField.value,
             this.passwordField.value
         );
+
     }
 }

@@ -17,6 +17,7 @@ export default class FeedbackView extends React.Component {
 
     componentWillMount() {
         appStore.on('feedbackChange', this.getFeedbackMessages);
+        componentAcions.requestFeedbackMessages();
     }
 
     componentWillUnmount() {
@@ -38,7 +39,7 @@ export default class FeedbackView extends React.Component {
                                 className="feedback-delete">{
                                 (feedbackObj._acl.creator === appStore.userData.userId) ?
                                     <input type="button" onClick={FeedbackView
-                                        .deleteArticleComment.bind(this, feedbackObj)}
+                                        .deleteFeedback.bind(this, feedbackObj)}
                                            value="Delete"/> : null
                             }</span>
                         </h3>
@@ -105,9 +106,9 @@ export default class FeedbackView extends React.Component {
         }
     }
 
-    static deleteArticleComment(commentObject) {
-        componentAcions.deleteArticleComment(
-            commentObject._id, commentObject.article_id);
+    static deleteFeedback(feedbackObject) {
+        componentAcions.deleteFeedback(
+            feedbackObject._id);
     }
 
     static refreshFeedbackComments() {

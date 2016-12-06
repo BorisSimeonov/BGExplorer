@@ -154,6 +154,7 @@ let KinveyAjaxRequester = (function () {
             headers: getKinveyAuthHeaders()
         });
     };
+
     let sendFeedbackRequest = function (feedback_text,user_name,timestamp) {
         return $.ajax({
             method: 'POST',
@@ -168,6 +169,15 @@ let KinveyAjaxRequester = (function () {
             }),
             contentType: 'application/json'
         });
+    };
+
+    let deleteFeedbackById = function (feedbackId) {
+        return $.ajax({
+            method: 'DELETE',
+            url: base_url + 'appdata/' + app_key +
+            '/user-feedback/' + feedbackId,
+            headers: getKinveyAuthHeaders()
+        })
     };
 
     return {
@@ -185,7 +195,8 @@ let KinveyAjaxRequester = (function () {
         deleteArticleCommentById,
         requestRefreshFeedbackMessages,
         requestArticleNamesContainingSubstring,
-        sendFeedbackRequest
+        sendFeedbackRequest,
+        deleteFeedbackById
     }
 })();
 

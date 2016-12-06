@@ -199,3 +199,13 @@ export function deleteArticleComment(commentId, selectedArticleId) {
         this.requestArticleFeedback(selectedArticleId);
     }
 }
+
+export function deleteFeedback(feedbackId) {
+    kinveyAjaxRequester.deleteFeedbackById(feedbackId)
+        .then(deleteSuccess.bind(this));
+
+    function deleteSuccess() {
+        App.showInfo('Comment deleted.');
+        requestFeedbackMessages();
+    }
+}
